@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Your Crypto Bro</title>
+</head>
+<body>
+
+<div class="header">
+    <div>
+        <a href="/">Your Crypto Bro</a>
+    </div>
+    <div>
+        <form method="get">
+            <label for="search">Search coins: </label>
+            <input type="text" id="search" name="search" placeholder="COIN">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div>
+        <a href="/login">Login</a>
+    </div>
+</div>
+
+{% block content %}{% endblock %}
+</body>
+</html>

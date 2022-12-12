@@ -1,0 +1,13 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <section>
+        <p>Coins</p>
+        <ul>
+            {% for cryptoCurrency in cryptoCurrencies %}
+                <li>
+                    {{ cryptoCurrency.symbol }}  changed by {{ cryptoCurrency.percentChange24h|number_format(2) }}%
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}
