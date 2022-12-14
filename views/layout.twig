@@ -36,19 +36,15 @@
     <div class="header-profile">
         {% if auth %}
             <div>
-                <p class="welcome">Welcome {{ auth.name }}</p>
+                <a class="welcome" href="/profile">Welcome {{ auth.name }}</a>
             </div>
             <div>
-                <form action="/profile" method="get">
-                    <button class="left-side-buttons">Profile</button>
-                </form>
-                <form action="/logout" method="get">
-                    <button class="left-side-buttons">Logout</button>
-                </form>
+                <a class="left-side-buttons" href="/profile">Profile</a>
+                <br><br>
+                <a class="left-side-buttons" href="/logout">Logout</a>
             </div>
         {% else %}
-            <form action="/login" method="get">
-                <button class="left-side-buttons">Login</button>
+            <a class="left-side-buttons" href="/login">Login</a>
             </form>
         {% endif %}
     </div>

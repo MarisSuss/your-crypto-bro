@@ -1,17 +1,25 @@
 {% extends 'layout.twig' %}
 {% block content %}
     <br><br><br>
-    You're looking for {{ cryptoCurrency.symbol }} {{ cryptoCurrency.price }}.
+    You're looking for {{ cryptoCurrency.symbol }} {{ cryptoCurrency.price|number_format(2) }}$.
 
     <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
         <label for="buy">Buy amount: </label>
-        <input type="text" id="buy" name="buy">
+        <input type="number" id="buy" name="buy">
+        <label for="symbol"></label>
+        <input type="hidden" name="symbol" value="{{ cryptoCurrency.symbol }}">
+        <label for="price"></label>
+        <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
         <button>BUY</button>
     </form>
 
     <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
         <label for="sell">Sell amount: </label>
-        <input type="text" id="sell" name="sell">
+        <input type="number" id="sell" name="sell">
+        <label for="symbol"></label>
+        <input type="hidden" name="symbol" value="{{ cryptoCurrency.symbol }}">
+        <label for="price"></label>
+        <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
         <button>SELL</button>
     </form>
 
