@@ -8,12 +8,11 @@ class RegisterService
 {
     public function execute(RegisterServiceRequest $request): void
     {
-        $connection = Database::getConnection();
-        $connection->insert(
+        Database::getConnection()->insert(
             'users', [
-            'name' => $request->getName(),
-            'email' => $request->getEmail(),
-            'password' => password_hash($request->getPassword(), PASSWORD_DEFAULT),
+                'name' => $request->getName(),
+                'email' => $request->getEmail(),
+                'password' => password_hash($request->getPassword(), PASSWORD_DEFAULT),
             ]
         );
     }

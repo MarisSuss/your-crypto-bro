@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Database;
 use App\DataTransferObjects\Redirect;
 use App\DataTransferObjects\View;
 use App\Services\Register\RegisterService;
@@ -16,18 +17,20 @@ class RegisterController
 
     public function register(): Redirect
     {
-        if (! empty($_SESSION['errors'])) {
+        $request = new RegisterServiceRequest(
+            $_POST['name'],
+            $_POST['email'],
+            $_POST['password']
+        );
+
+        if ($_POST['password'] !== $_POST['password_confirmation']) {
+            $_SESSION['errors']['password'] = 'Password does not match confirmation';
             return new Redirect('/register');
         }
 
-        $registerService = new RegisterService();
-        $registerService->execute(
-            new RegisterServiceRequest(
-                $_POST['name'],
-                $_POST['email'],
-                $_POST['password']
-            )
-        );
+       // To do: validate email
+
+        (new RegisterService())->execute($request);
 
         return new Redirect('/login');
     }

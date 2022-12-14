@@ -1,0 +1,10 @@
+{% extends 'layout.twig' %}
+{% block content %}
+<h1>Are you sure you want logout?</h1>
+    <form action="/logout" method="post">
+        <button>Yes</button>
+    </form>
+    <form action="/" method="get">
+        <button>No</button>
+    </form>
+{% endblock %}

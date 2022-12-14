@@ -2,10 +2,10 @@
 
 namespace App\Services\CryptoCurrency;
 
-use App\Models\Collections\CryptoCurrenciesCollection;
+use App\Models\CryptoCurrency;
 use App\Repositories\CryptoCurrenciesRepository;
 
-class ListCryptoCurrenciesService
+class ShowCryptoCurrencyService
 {
     private CryptoCurrenciesRepository $repository;
 
@@ -14,9 +14,8 @@ class ListCryptoCurrenciesService
         $this->repository = $repository;
     }
 
-    public function execute(array $symbols): CryptoCurrenciesCollection
+    public function execute(string $symbol): CryptoCurrency
     {
-        return $this->repository->fetchAllBySymbols($symbols);
+        return $this->repository->fetchBySymbol($symbol);
     }
-
 }

@@ -1,0 +1,85 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #222222;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.logo {
+    font-family: Inter;
+    font-weight: 700;
+    margin-left: 200px;
+    font-size: 30px;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    border: none;
+    text-transform: uppercase;
+}
+.logo-text {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 40px;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    border: none;
+    text-transform: uppercase;
+}
+
+.search-div {
+    display: flex;
+    align-items: center;
+}
+
+.search-div label {
+    font-size: 22px;
+    color: white;
+    margin-right: 10px;
+}
+
+.search-div input[type="text"] {
+    font-size: 22px;
+    padding: 5px;
+}
+
+.search-div input[type="submit"] {
+    font-size: 22px;
+    padding: 5px 10px;
+    background-color: #222222;
+    color: white;
+    border: none;
+}
+
+.header-profile {
+    margin-right: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.header-profile button {
+    padding: 5px 10px;
+    background-color: #222222;
+    color: white;
+    border: none;
+}
+
+.welcome {
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
+    margin-right: 30px;
+}
+
+.search-bar {
+    width: 150px;
+    height: 20px;
+    font-size: 22px;
+}
+
+.left-side-buttons {
+    font-size: 20px;
+}

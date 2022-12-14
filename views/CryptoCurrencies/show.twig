@@ -1,0 +1,18 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <br><br><br>
+    You're looking for {{ cryptoCurrency.symbol }} {{ cryptoCurrency.price }}.
+
+    <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
+        <label for="buy">Buy amount: </label>
+        <input type="text" id="buy" name="buy">
+        <button>BUY</button>
+    </form>
+
+    <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
+        <label for="sell">Sell amount: </label>
+        <input type="text" id="sell" name="sell">
+        <button>SELL</button>
+    </form>
+
+{% endblock %}

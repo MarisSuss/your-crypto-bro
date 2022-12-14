@@ -5,7 +5,7 @@
         <ul>
             {% for cryptoCurrency in cryptoCurrencies %}
                 <li>
-                    {{ cryptoCurrency.symbol }}  changed by {{ cryptoCurrency.percentChange24h|number_format(2) }}%
+                    <a href="/crypto/{{ cryptoCurrency.symbol }}">{{ cryptoCurrency.symbol }}</a> changed by {{ cryptoCurrency.percentChange24h|number_format(2) }}%
                 </li>
             {% endfor %}
         </ul>
