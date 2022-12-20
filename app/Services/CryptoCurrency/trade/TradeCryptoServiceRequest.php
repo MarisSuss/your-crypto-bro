@@ -5,14 +5,14 @@ namespace App\Services\CryptoCurrency\trade;
 class TradeCryptoServiceRequest
 {
     private string $cryptoSymbol;
+    private float $cryptoAmount;
     private float $cryptoPrice;
-    private int $cryptoAmount;
 
-    public function __construct(string $cryptoSymbol, float $cryptoPrice, int $cryptoAmount)
+    public function __construct(string $cryptoSymbol, float $cryptoAmount, float $cryptoPrice)
     {
         $this->cryptoSymbol = $cryptoSymbol;
-        $this->cryptoPrice = $cryptoPrice;
         $this->cryptoAmount = $cryptoAmount;
+        $this->cryptoPrice = $cryptoPrice;
     }
 
     public function getCryptoSymbol(): string
@@ -20,13 +20,13 @@ class TradeCryptoServiceRequest
         return $this->cryptoSymbol;
     }
 
+    public function getCryptoAmount(): float
+    {
+        return $this->cryptoAmount;
+    }
+
     public function getCryptoPrice(): float
     {
         return $this->cryptoPrice;
-    }
-
-    public function getCryptoAmount(): int
-    {
-        return $this->cryptoAmount;
     }
 }

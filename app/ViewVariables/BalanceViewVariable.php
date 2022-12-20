@@ -4,11 +4,11 @@ namespace App\ViewVariables;
 
 use App\Database;
 
-class AuthViewVariables implements ViewVariables
+class BalanceViewVariable implements ViewVariables
 {
     public function getName(): string
     {
-        return 'auth';
+        return 'balance';
     }
 
     public function getValue(): array
@@ -26,10 +26,7 @@ class AuthViewVariables implements ViewVariables
             ->fetchAssociative();
 
         return [
-            'id' => $user['id'],
-            'name' => $user['name'],
-            'email' => $user['email'],
-            'money' => $user['money']
+            'balance' => $user['money']
         ];
     }
 }

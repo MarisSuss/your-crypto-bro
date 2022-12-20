@@ -11,6 +11,10 @@ use App\DataTransferObjects\Redirect;
 use App\DataTransferObjects\View;
 use App\Repositories\CryptoCurrenciesRepository;
 use App\Session;
+use App\ViewVariables\AuthViewVariables;
+use App\ViewVariables\BalanceViewVariable;
+use App\ViewVariables\ErrorsViewVariable;
+use App\ViewVariables\ProfileTransactionsViewVariable;
 
 Session::initialize();
 
@@ -19,7 +23,7 @@ $dotenv->load();
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader, [
-  //  'cache' => '/path/to/compilation_cache',
+    //  'cache' => '/path/to/compilation_cache',
 ]);
 
 $container = new DI\Container();
@@ -29,8 +33,10 @@ $container->set(
 );
 
 $authVariables = [
-    \App\ViewVariables\AuthViewVariables::class,
-    \App\ViewVariables\ErrorsViewVariable::class
+    AuthViewVariables::class,
+    ErrorsViewVariable::class,
+    BalanceViewVariable::class,
+    ProfileTransactionsViewVariable::class
 ];
 
 foreach ($authVariables as $variable) {
@@ -39,7 +45,7 @@ foreach ($authVariables as $variable) {
     $twig->addGlobal($variable->getName(), $variable->getValue());
 }
 
-$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', [CryptoCurrencyController::class, 'index']);
     $r->addRoute('GET', '/crypto', [CryptoCurrencyController::class, 'index']);
 
@@ -59,6 +65,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/register', [RegisterController::class, 'register']);
 
     $r->addRoute('GET', '/profile', [UserProfileController::class, 'index']);
+    $r->addRoute('POST', '/profile', [UserProfileController::class, 'send']);
+    $r->addRoute('GET', '/profile/{user}', [UserProfileController::class, 'findUser']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -86,7 +94,7 @@ switch ($routeInfo[0]) {
 
         $response = $container->get($controller)->$method($vars);
 
-        if($response instanceof View) {
+        if ($response instanceof View) {
             echo $twig->render($response->getPath(), $response->getData());
             unset($_SESSION['errors']);
         }

@@ -12,6 +12,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "doctrine/dbal": "^3.5",
-        "php-di/php-di": "^6.4"
+        "php-di/php-di": "^6.4",
+        "nesbot/carbon": "^2.64"
     }
 }

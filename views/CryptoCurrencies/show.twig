@@ -1,6 +1,8 @@
 {% extends 'layout.twig' %}
 {% block content %}
     <br><br><br>
+    <p>Available balance is {{ balance.balance|number_format(2) }}</p>
+    <br>
     You're looking for {{ cryptoCurrency.symbol }} {{ cryptoCurrency.price|number_format(2) }}$.
 
     <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\DataTransferObjects\Redirect;
 use App\DataTransferObjects\View;
 use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
 use App\Services\CryptoCurrency\ShowCryptoCurrencyService;
@@ -47,16 +48,15 @@ class CryptoCurrencyController
         ]);
     }
 
-    public function trade(array $vars): View
+    public function trade(array $vars): Redirect
     {
-        if($_POST['buy']) {
+
+        if ($_POST['buy']) {
             (new BuyCryptoService)->index($_POST);
         } else {
             (new SellCryptoService)->index($_POST);
         }
 
-        return View::render('CryptoCurrencies/show.twig', [
-            'cryptoCurrency' => $this->showCryptoCurrencyService->execute($vars['symbol'])
-        ]);
+        return new Redirect('/crypto/' . $vars['symbol']);
     }
 }

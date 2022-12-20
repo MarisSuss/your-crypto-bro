@@ -27,7 +27,7 @@
     <div class="search-div">
         <form action="/" method="post">
             <label for="search">Search crypto: </label>
-            <input class="search-bar" type="text" id="search" name="search" placeholder="COIN">
+            <input class="search-bar" type="text" id="search" name="search" placeholder="COIN" required>
             <input type="submit" value="Search">
         </form>
     </div>
@@ -45,7 +45,6 @@
             </div>
         {% else %}
             <a class="left-side-buttons" href="/login">Login</a>
-            </form>
         {% endif %}
     </div>
 </div>

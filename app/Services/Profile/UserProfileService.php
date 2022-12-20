@@ -1,28 +1,17 @@
 <?php
 
-namespace App\ViewVariables;
+namespace App\Services\Profile;
 
-use App\Database;
-
-class AuthViewVariables implements ViewVariables
+class UserProfileService
 {
-    public function getName(): string
+    public function getUserProfile(int $id): array
     {
-        return 'auth';
-    }
-
-    public function getValue(): array
-    {
-        if (! isset($_SESSION['auth_id'])) {
-            return [];
-        }
-
         $queryBuilder = Database::getConnection()->createQueryBuilder();
         $user = $queryBuilder
             ->select('*')
             ->from('users')
             ->where('id = ?')
-            ->setParameter(0, $_SESSION['auth_id'])
+            ->setParameter(0, $id)
             ->fetchAssociative();
 
         return [
