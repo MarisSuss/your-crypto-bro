@@ -14,7 +14,6 @@ use App\Session;
 use App\ViewVariables\AuthViewVariables;
 use App\ViewVariables\BalanceViewVariable;
 use App\ViewVariables\ErrorsViewVariable;
-use App\ViewVariables\ProfileTransactionsViewVariable;
 
 Session::initialize();
 
@@ -36,7 +35,6 @@ $authVariables = [
     AuthViewVariables::class,
     ErrorsViewVariable::class,
     BalanceViewVariable::class,
-    ProfileTransactionsViewVariable::class
 ];
 
 foreach ($authVariables as $variable) {
@@ -65,6 +63,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('POST', '/register', [RegisterController::class, 'register']);
 
     $r->addRoute('GET', '/profile', [UserProfileController::class, 'index']);
+    $r->addRoute('GET', '/wallet', [UserProfileController::class, 'userWallet']);
     $r->addRoute('POST', '/profile', [UserProfileController::class, 'send']);
     $r->addRoute('GET', '/profile/{user}', [UserProfileController::class, 'findUser']);
 });

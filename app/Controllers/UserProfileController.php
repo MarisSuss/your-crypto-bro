@@ -4,12 +4,26 @@ namespace App\Controllers;
 
 use App\DataTransferObjects\Redirect;
 use App\DataTransferObjects\View;
+use App\Services\Profile\ListTransactionsService;
 
 class UserProfileController
 {
+    private ListTransactionsService $listTransactionsService;
+
+    public function __construct(ListTransactionsService $listTransactionsService)
+    {
+        $this->listTransactionsService = $listTransactionsService;
+    }
+
     public function index(): View
     {
-        return View::render('profileViews/userProfile.twig', []);
+        $transactions = $this->listTransactionsService->execute();
+        return View::render('profileViews/userProfile.twig', ['transactions' => $transactions->all()]);
+    }
+
+    public function userWallet(): View
+    {
+        return View::render('profileViews/userWallet.twig', []);
     }
 
     public function send(): Redirect

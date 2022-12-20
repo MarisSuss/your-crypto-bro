@@ -1,0 +1,14 @@
+{% extends 'layout.twig' %}
+{% block content %}
+
+    <h1>Available coins: </h1>
+
+<div class="transfer-profile">
+    <form action="/wallet" method="post">
+        <label for="user">Search for user: </label>
+        <input type="text" id="user" name="user" placeholder="CRYPTO BRO" required>
+        <input type="submit" value="Search">
+    </form>
+</div>
+
+{% endblock %}
