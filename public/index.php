@@ -64,7 +64,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 
     $r->addRoute('GET', '/profile', [UserProfileController::class, 'index']);
     $r->addRoute('GET', '/wallet', [UserProfileController::class, 'userWallet']);
-    $r->addRoute('POST', '/profile', [UserProfileController::class, 'send']);
+    $r->addRoute('POST', '/wallet', [UserProfileController::class, 'send']);
     $r->addRoute('GET', '/profile/{user}', [UserProfileController::class, 'findUser']);
 });
 

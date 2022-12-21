@@ -1,14 +1,34 @@
 {% extends 'layout.twig' %}
 {% block content %}
 
-    <h1>Available coins: </h1>
+    <div class="wallet">
+        <div class="wallet-coins">
+            <h1>Your Crypto Wallet</h1>
+            <table class="wallet-table">
+                <tr>
+                    <th>Crypto coin</th>
+                    <th>Amount</th>
+                    <th>Average price when bought</th>
+                </tr>
+                {% for userCoin in userCoins %}
+                    <tr>
+                        <td><a href="/crypto/{{ userCoin.symbol }}">{{ userCoin.symbol }}</a></td>
+                        <td>{{ userCoin.amount }}</td>
+                        <td>{{ userCoin.originalPriceAverage|number_format(2) }}$</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
 
-<div class="transfer-profile">
-    <form action="/wallet" method="post">
-        <label for="user">Search for user: </label>
-        <input type="text" id="user" name="user" placeholder="CRYPTO BRO" required>
-        <input type="submit" value="Search">
-    </form>
-</div>
+        <div class="transfer-profile">
+            <form action="/wallet" method="post">
+                <label for="user">Search for user: </label>
+                <input type="text" id="user" name="user" placeholder="CRYPTO BRO" required>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+
+
 
 {% endblock %}

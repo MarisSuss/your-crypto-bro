@@ -5,14 +5,20 @@ namespace App\Controllers;
 use App\DataTransferObjects\Redirect;
 use App\DataTransferObjects\View;
 use App\Services\Profile\ListTransactionsService;
+use App\Services\Profile\ListUserCoinsService;
 
 class UserProfileController
 {
     private ListTransactionsService $listTransactionsService;
+    private ListUserCoinsService $listUserCoinsService;
 
-    public function __construct(ListTransactionsService $listTransactionsService)
+    public function __construct(
+        ListTransactionsService $listTransactionsService,
+        ListUserCoinsService $listUserCoinsService
+    )
     {
         $this->listTransactionsService = $listTransactionsService;
+        $this->listUserCoinsService = $listUserCoinsService;
     }
 
     public function index(): View
@@ -23,7 +29,8 @@ class UserProfileController
 
     public function userWallet(): View
     {
-        return View::render('profileViews/userWallet.twig', []);
+        $userCoins = $this->listUserCoinsService->execute();
+        return View::render('profileViews/userWallet.twig', ['userCoins' => $userCoins->all()]);
     }
 
     public function send(): Redirect
