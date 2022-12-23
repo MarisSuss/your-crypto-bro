@@ -17,6 +17,9 @@
             <input type="password" id="password-confirmation" name="password_confirmation" required>
             <br>
             <input type="submit" value="Register">
+            {% if errors.register %}
+                <p style="color: red; font-weight: bold">{{ errors.register }}</p>
+            {% endif %}
         </form>
     </div>
 {% endblock %}

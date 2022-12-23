@@ -44,15 +44,16 @@ class UserProfileController
 
     public function send(): Redirect
     {
-        return new Redirect('/profile/' . $_POST['user']);
-    }
-
-    public function findUser($vars)
-    {
-        $findUser = $this->findUserService->execute($vars);
+        $this->findUserService->execute($_POST['user']);
         if ($_SESSION['errors']['findUser']) {
             return new Redirect('/profile');
         }
+        return new Redirect('/profile/' . $_POST['user']);
+    }
+
+    public function findUser(array $vars): View
+    {
+        $findUser = $this->findUserService->execute($vars['user']);
         return View::render('profileViews/findUser.twig', ['findUser' => $findUser]);
     }
 

@@ -9,22 +9,26 @@ use App\Services\CryptoCurrency\ShowCryptoCurrencyService;
 use App\Services\CryptoCurrency\Trade\BuyCryptoService;
 use App\Services\CryptoCurrency\Trade\SellCryptoService;
 use App\Services\Profile\ListTransactionsService;
+use App\Services\Validator;
 
 class CryptoCurrencyController
 {
     private ListCryptoCurrenciesService $listCryptoCurrenciesService;
     private ShowCryptoCurrencyService $showCryptoCurrencyService;
     private ListTransactionsService $listTransactionsService;
+    private Validator $validator;
 
     public function __construct(
         ListCryptoCurrenciesService $listCryptoCurrenciesService,
         ShowCryptoCurrencyService   $showCryptoCurrencyService,
-        ListTransactionsService $listTransactionsService
+        ListTransactionsService $listTransactionsService,
+        Validator $validator
     )
     {
         $this->listCryptoCurrenciesService = $listCryptoCurrenciesService;
         $this->showCryptoCurrencyService = $showCryptoCurrencyService;
         $this->listTransactionsService = $listTransactionsService;
+        $this->validator = $validator;
     }
 
     public function index(): View
@@ -57,15 +61,28 @@ class CryptoCurrencyController
 
     public function send(): Redirect
     {
+        $this->showCryptoCurrencyService->execute($_POST['search']);
+        if ($_SESSION['errors']['search']) {
+            return new Redirect('/crypto');
+        }
         return new Redirect('/crypto/' . $_POST['search']);
     }
 
     public function trade(array $vars): Redirect
     {
-
         if ($_POST['buy']) {
+            $this->validator->validateTrade($_POST['buy']);
+            if ($_SESSION['errors']['trade']) {
+                return new Redirect('/crypto/' . $vars['symbol']);
+            }
+
             (new BuyCryptoService)->index($_POST);
         } else {
+            $this->validator->validateTrade($_POST['sell']);
+            if ($_SESSION['errors']['trade']) {
+                return new Redirect('/crypto/' . $vars['symbol']);
+            }
+
             (new SellCryptoService)->index($_POST);
         }
 

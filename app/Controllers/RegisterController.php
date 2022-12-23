@@ -24,7 +24,7 @@ class RegisterController
         );
 
         if ($_POST['password'] !== $_POST['password_confirmation']) {
-            $_SESSION['errors']['password'] = 'Password does not match confirmation';
+            $_SESSION['errors']['register'] = 'Password does not match confirmation';
             return new Redirect('/register');
         }
 

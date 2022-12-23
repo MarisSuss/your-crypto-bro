@@ -14,7 +14,7 @@ class ShowCryptoCurrencyService
         $this->repository = $repository;
     }
 
-    public function execute(string $symbol): CryptoCurrency
+    public function execute(string $symbol): ?CryptoCurrency
     {
         return $this->repository->fetchBySymbol($symbol);
     }

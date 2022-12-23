@@ -64,10 +64,16 @@
                     {% if errors.closing %}
                         <p style="color: red; font-weight: bold">{{ errors.closing }}</p>
                     {% endif %}
+
                 </form>
             </div>
-        </div>
 
+        </div>
+        {% if errors.trade %}
+            <div>
+                <p style="color: red; font-weight: bold">{{ errors.trade }}</p>
+            </div>
+        {% endif %}
         {% if transactions %}
         <div class="show-transactions">
             <h2>Your transaction history for {{ cryptoCurrency.name }} crypto currency</h2>

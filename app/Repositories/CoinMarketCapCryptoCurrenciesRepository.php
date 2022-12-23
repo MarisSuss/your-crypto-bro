@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Collections\CryptoCurrenciesCollection;
 use App\Models\CryptoCurrency;
+use Carbon\Exceptions\InvalidFormatException;
 use GuzzleHttp\Client;
 
 class CoinMarketCapCryptoCurrenciesRepository implements CryptoCurrenciesRepository
@@ -35,12 +36,13 @@ class CoinMarketCapCryptoCurrenciesRepository implements CryptoCurrenciesReposit
     public function fetchBySymbol(string $symbol): ?CryptoCurrency
     {
         $response = $this->fetch($symbol);
-        try {
-            return $this->buildModel($response->data->{$symbol});
-        } catch (\Exception $e) {
+
+        if (!$response->data->{$symbol}) {
             $_SESSION['errors']['search'] = 'Failed to find!';
+            return null;
         }
-        return null;
+
+        return $this->buildModel($response->data->{$symbol});
     }
 
     private function fetch(string $symbols)

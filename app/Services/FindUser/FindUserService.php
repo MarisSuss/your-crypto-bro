@@ -7,14 +7,14 @@ use App\Models\OtherUser;
 
 class FindUserService
 {
-    public function execute(array $vars): ?OtherUser
+    public function execute(string $name): ?OtherUser
     {
         $queryBuilder = Database::getConnection()->createQueryBuilder();
         $userInfo = $queryBuilder
             ->select('*')
             ->from('users')
             ->where('name = ?')
-            ->setParameter(0, $vars['user'])
+            ->setParameter(0, $name)
             ->fetchAssociative();
 
         if (!$userInfo) {
