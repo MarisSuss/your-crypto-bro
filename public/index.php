@@ -105,7 +105,6 @@ switch ($routeInfo[0]) {
         }
         if ($response instanceof Redirect) {
             header('Location: ' . $response->getUrl());
-            unset($_SESSION['errors']);
         }
 
         break;

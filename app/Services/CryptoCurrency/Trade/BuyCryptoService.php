@@ -10,6 +10,10 @@ class BuyCryptoService
 {
     public function index(array $post): void
     {
+        if (!$_SESSION['auth_id']) {
+            $_SESSION['errors']['buy'] = 'Login first!';
+            return;
+        }
         $price = (new CoinMarketCapCryptoCurrenciesRepository)->fetchBySymbol($post['symbol'])->getPrice();
 
         $request = new TradeCryptoServiceRequest(

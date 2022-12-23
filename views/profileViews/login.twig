@@ -11,6 +11,10 @@
             <input type="password" id="password" name="password" required>
             <br>
             <input type="submit" value="Login">
+            <br>
+            {% if errors.login %}
+            <p style="color: red; font-weight: bold">{{ errors.login }}</p>
+            {% endif %}
         </form>
     </div>
 

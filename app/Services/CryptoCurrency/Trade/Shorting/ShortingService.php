@@ -10,6 +10,11 @@ class ShortingService
 {
     public function execute(array $post): void
     {
+        if (!$_SESSION['auth_id']) {
+            $_SESSION['errors']['shorting'] = 'Login first!';
+            return;
+        }
+
         $price = (new CoinMarketCapCryptoCurrenciesRepository)->fetchBySymbol($post['symbol'])->getPrice();
         $request = new TradeCryptoServiceRequest(
             $post['symbol'],

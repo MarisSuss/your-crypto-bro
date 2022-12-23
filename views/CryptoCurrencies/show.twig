@@ -17,6 +17,9 @@
                     <label for="price"></label>
                     <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
                     <button>BUY</button>
+                    {% if errors.buy %}
+                        <p style="color: red; font-weight: bold">{{ errors.buy }}</p>
+                    {% endif %}
                 </form>
 
                 <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
@@ -27,6 +30,9 @@
                     <label for="price"></label>
                     <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
                     <button>SELL</button>
+                    {% if errors.sell %}
+                        <p style="color: red; font-weight: bold">{{ errors.sell }}</p>
+                    {% endif %}
                 </form>
             </div>
 
@@ -42,6 +48,9 @@
                     <label for="price"></label>
                     <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
                     <button>SHORT</button>
+                    {% if errors.shorting %}
+                        <p style="color: red; font-weight: bold">{{ errors.shorting }}</p>
+                    {% endif %}
                 </form>
 
                 <form action="/closing" method="post">
@@ -52,6 +61,9 @@
                     <label for="price"></label>
                     <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
                     <button>CLOSE</button>
+                    {% if errors.closing %}
+                        <p style="color: red; font-weight: bold">{{ errors.closing }}</p>
+                    {% endif %}
                 </form>
             </div>
         </div>

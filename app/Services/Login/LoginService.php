@@ -21,6 +21,8 @@ class LoginService
         }
         if ($user && password_verify($request->getPassword(), $user['password'])) {
             $_SESSION['auth_id'] = $user['id'];
+        } else {
+            $_SESSION['errors']['login'] = 'Login failed';
         }
     }
 }

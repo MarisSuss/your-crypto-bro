@@ -9,6 +9,10 @@ class SellCryptoService
 {
     public function index(array $post): void
     {
+        if (!$_SESSION['auth_id']) {
+            $_SESSION['errors']['sell'] = 'Login first!';
+            return;
+        }
         $price = (new CoinMarketCapCryptoCurrenciesRepository)->fetchBySymbol($post['symbol'])->getPrice();
 
         $post['sell'] = (float)$post['sell'];
