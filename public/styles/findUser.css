@@ -1,11 +1,42 @@
 .other-user {
-    border: 2px solid black;
-    background-color: white;
+    border: 20px solid #507386;
+    background-color: #d7e0ea;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-    width: 800px;
+    width: 700px;
     position: absolute;
-    top: 200px;
+    top: 125px;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+}
+
+.transfer-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+}
+
+.transfer-form-line {
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.transfer-input {
+    width: 150px;
+    height: 20px;
+    font-size: 20px;
+}
+
+.transfer-password {
+    width: 245px;
+    height: 20px;
+    font-size: 20px;
 }

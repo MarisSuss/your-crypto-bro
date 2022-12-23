@@ -1,13 +1,18 @@
 .featured {
-    border: 2px solid black;
-    background-color: white;
+    border: 20px solid #507386;
+    background-color: #d7e0ea;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-    width: 800px;
+    width: 900px;
     position: absolute;
-    top: 200px;
+    top: 125px;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
 }
 
 .featured-table {
@@ -16,10 +21,18 @@
 }
 .featured-table  th, .featured-table  td {
     text-align: center;
-    padding: 8px;
+    padding: 12px;
 }
-.featured-table  tr:nth-child(even){background-color: #f2f2f2}
+.featured-table  tr:nth-child(even){background-color: #ffffff
+}
 .featured-table  th {
-    background-color: #4caf50;
+    background-color: #507386;
     color: white;
+}
+
+.featured-title {
+    font-size: 45px;
+    font-weight: bold;
+    color: #2b3c46;
+    padding: 10px;
 }

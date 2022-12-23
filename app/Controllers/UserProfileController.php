@@ -32,13 +32,14 @@ class UserProfileController
     public function index(): View
     {
         // $transactions = $this->listTransactionsService->execute();
-        return View::render('profileViews/userProfile.twig', []);
+        $userCoins = $this->listUserCoinsService->execute();
+        return View::render('profileViews/userProfile.twig', ['userCoins' => $userCoins->all()]);
     }
 
     public function userWallet(): View
     {
         $userCoins = $this->listUserCoinsService->execute();
-        return View::render('profileViews/userWallet.twig', ['userCoins' => $userCoins->all()]);
+        return View::render('profileViews/userProfile.twig', ['userCoins' => $userCoins->all()]);
     }
 
     public function send(): Redirect

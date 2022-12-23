@@ -55,11 +55,9 @@ class CryptoCurrencyController
         ]);
     }
 
-    public function send(): View
+    public function send(): Redirect
     {
-        return View::render('CryptoCurrencies/show.twig', [
-            'cryptoCurrency' => $this->showCryptoCurrencyService->execute($_POST['search'])
-        ]);
+        return new Redirect('/crypto/' . $_POST['search']);
     }
 
     public function trade(array $vars): Redirect

@@ -1,7 +1,7 @@
 {% extends 'layout.twig' %}
 {% block content %}
     <div class="featured">
-        <h1>Featured Crypto</h1>
+        <h1 class="featured-title">Featured Crypto</h1>
         <table class="featured-table">
             <tr>
                 <th>Symbol</th>
@@ -16,9 +16,23 @@
                     <td><a href="/crypto/{{ cryptoCurrency.symbol }}">{{ cryptoCurrency.symbol }}</a></td>
                     <td>{{ cryptoCurrency.name }}</td>
                     <td>{{ cryptoCurrency.price|number_format(2) }}$</td>
-                    <td>{{ cryptoCurrency.percentChange1h|number_format(2) }}%</td>
-                    <td>{{ cryptoCurrency.percentChange24h|number_format(2) }}%</td>
-                    <td>{{ cryptoCurrency.percentChange7d|number_format(2) }}%</td>
+                    {% if cryptoCurrency.percentChange1h > 0 %}
+                        <td style="color: green">{{ cryptoCurrency.percentChange1h|number_format(2) }}% 	&#8593</td>
+                    {% else %}
+                        <td style="color: red">{{ cryptoCurrency.percentChange1h|number_format(2) }}% 	&#8595</td>
+                    {% endif %}
+                    </td>
+                    {% if cryptoCurrency.percentChange24h > 0 %}
+                        <td style="color: green">{{ cryptoCurrency.percentChange24h|number_format(2) }}% 	&#8593</td>
+                    {% else %}
+                        <td style="color: red">{{ cryptoCurrency.percentChange24h|number_format(2) }}% 	&#8595</td>
+                    {% endif %}
+                    </td>
+                    {% if cryptoCurrency.percentChange7d > 0 %}
+                        <td style="color: green">{{ cryptoCurrency.percentChange7d|number_format(2) }}% 	&#8593</td>
+                    {% else %}
+                        <td style="color: red">{{ cryptoCurrency.percentChange7d|number_format(2) }}% 	&#8595</td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>
