@@ -14,7 +14,12 @@ class ListTransactionsService
         $this->mySqlTransactionsRepository = $mySqlTransactionsRepository;
     }
 
-    public function execute(): TransactionsCollection
+    public function checkIfSymbolHasTransactions(string $symbol): bool
+    {
+        return $this->mySqlTransactionsRepository->checkIfSymbolHasTransactions($symbol);
+    }
+
+    public function execute(): ?TransactionsCollection
     {
         return $this->mySqlTransactionsRepository->fetchAllTransactions();
     }

@@ -1,12 +1,28 @@
 {% extends 'layout.twig' %}
 {% block content %}
+    <div class="profile">
+        <div class="profile-balance">
+            <h1>{{ auth.name }}'s balance is {{ auth.money|number_format(2) }}$</h1>
+        </div>
 
-    <h1>{{ auth.name }}'s balance is {{ auth.money|number_format(2) }}</h1>
+        <div>
+            <div>
+                <h2><a href="/wallet">Go to your Crypto Wallet</a></h2>
 
-    <h2><a href="/wallet">Go to Wallet</a></h2>
+            </div>
+            <div class="transfer-profile">
+                <h2>Transfer Crypto</h2>
+                <form action="/profile" method="post">
+                    <label for="user">Search for user: </label>
+                    <input type="text" id="user" name="user" placeholder="CRYPTO BRO" required>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+        </div>
+        <div>
+            <h2>Transaction history</h2>
+        </div>
 
-    <h2>Transaction history</h2>
 
-
-
+    </div>
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Controllers\CryptoCurrencyController;
 use App\Controllers\LoginController;
 use App\Controllers\LogoutController;
 use App\Controllers\RegisterController;
+use App\Controllers\ShortingController;
 use App\Controllers\UserProfileController;
 use App\DataTransferObjects\Redirect;
 use App\DataTransferObjects\View;
@@ -50,8 +51,11 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('POST', '/', [CryptoCurrencyController::class, 'send']);
     $r->addRoute('POST', '/crypto', [CryptoCurrencyController::class, 'send']);
     $r->addRoute('GET', '/crypto/{symbol}', [CryptoCurrencyController::class, 'show']);
-
     $r->addRoute('POST', '/crypto/{symbol}', [CryptoCurrencyController::class, 'trade']);
+
+
+    $r->addRoute('POST', '/shorting', [ShortingController::class, 'shorting']);
+    $r->addRoute('POST', '/closing', [ShortingController::class, 'closing']);
 
     $r->addRoute('GET', '/login', [LoginController::class, 'index']);
     $r->addRoute('POST', '/login', [LoginController::class, 'login']);
@@ -64,8 +68,10 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 
     $r->addRoute('GET', '/profile', [UserProfileController::class, 'index']);
     $r->addRoute('GET', '/wallet', [UserProfileController::class, 'userWallet']);
-    $r->addRoute('POST', '/wallet', [UserProfileController::class, 'send']);
+    $r->addRoute('POST', '/profile', [UserProfileController::class, 'send']);
+
     $r->addRoute('GET', '/profile/{user}', [UserProfileController::class, 'findUser']);
+    $r->addRoute('POST', '/profile/{user}', [UserProfileController::class, 'transferCrypto']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

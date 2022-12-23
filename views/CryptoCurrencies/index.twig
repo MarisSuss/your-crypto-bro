@@ -1,13 +1,26 @@
 {% extends 'layout.twig' %}
 {% block content %}
-    <section>
-        <p>Coins</p>
-        <ul>
+    <div class="featured">
+        <h1>Featured Crypto</h1>
+        <table class="featured-table">
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Change in 1 hour</th>
+                <th>Change in 24 hours</th>
+                <th>Change in 7 days</th>
+            </tr>
             {% for cryptoCurrency in cryptoCurrencies %}
-                <li>
-                    <a href="/crypto/{{ cryptoCurrency.symbol }}">{{ cryptoCurrency.symbol }}</a> changed by {{ cryptoCurrency.percentChange24h|number_format(2) }}%
-                </li>
+                <tr>
+                    <td><a href="/crypto/{{ cryptoCurrency.symbol }}">{{ cryptoCurrency.symbol }}</a></td>
+                    <td>{{ cryptoCurrency.name }}</td>
+                    <td>{{ cryptoCurrency.price|number_format(2) }}$</td>
+                    <td>{{ cryptoCurrency.percentChange1h|number_format(2) }}%</td>
+                    <td>{{ cryptoCurrency.percentChange24h|number_format(2) }}%</td>
+                    <td>{{ cryptoCurrency.percentChange7d|number_format(2) }}%</td>
+                </tr>
             {% endfor %}
-        </ul>
-    </section>
+        </table>
+    </div>
 {% endblock %}

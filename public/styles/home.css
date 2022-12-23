@@ -1,0 +1,25 @@
+.featured {
+    border: 2px solid black;
+    background-color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    width: 800px;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+}
+
+.featured-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.featured-table  th, .featured-table  td {
+    text-align: center;
+    padding: 8px;
+}
+.featured-table  tr:nth-child(even){background-color: #f2f2f2}
+.featured-table  th {
+    background-color: #4caf50;
+    color: white;
+}

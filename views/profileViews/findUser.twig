@@ -1,15 +1,18 @@
 {% extends 'layout.twig' %}
 {% block content %}
-
-    <h1>User: </h1>
-    <br><br><br>
-    <h2>Send your crypto coins</h2>
-    <form action="/profile" method="post">
-        <label for="search">Crypto </label>
-        <input type="text" id="symbol" name="symbol" placeholder="COIN" required>
-        <label for="search">Amount </label>
-        <input type="text" id="amount" name="amount" required>
-        <input type="submit" value="Give coins">
-    </form>
-
+    <div class="other-user">
+        <h1>User: {{ findUser.name }}</h1>
+        <h2>Transfer your crypto coins</h2>
+        <form action="/profile/{{ findUser.name }}" method="post">
+            <label for="symbol">Crypto </label>
+            <input type="text" id="symbol" name="symbol" placeholder="COIN" required>
+            <label for="amount">Amount </label>
+            <input type="text" id="amount" name="amount" placeholder="420" required>
+            <label for="password">Confirm with password: </label>
+            <input type="password" id="password" name="password" required>
+            <label for="id"></label>
+            <input type="hidden" name="id" value="{{ findUser.id }}">
+            <input type="submit" value="Give coins">
+        </form>
+    </div>
 {% endblock %}

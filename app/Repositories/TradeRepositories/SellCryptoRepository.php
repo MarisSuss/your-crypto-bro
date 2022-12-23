@@ -33,7 +33,7 @@ class SellCryptoRepository
 
     public function checkIfEnoughCoinsAreAvailable(): bool
     {
-        return $this->getUserCoinAmount() - $this->totalCoins > 0;
+        return $this->getUserCoinAmount() - $this->totalCoins >= 0;
     }
 
     public function addMoneyToUser(): void

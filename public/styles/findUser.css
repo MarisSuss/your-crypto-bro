@@ -1,0 +1,11 @@
+.other-user {
+    border: 2px solid black;
+    background-color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    width: 800px;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+}

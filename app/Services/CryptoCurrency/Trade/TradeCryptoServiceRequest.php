@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\CryptoCurrency\trade;
+namespace App\Services\CryptoCurrency\Trade;
 
 class TradeCryptoServiceRequest
 {

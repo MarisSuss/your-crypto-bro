@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\CryptoCurrency\trade;
+namespace App\Services\CryptoCurrency\Trade;
 
 use App\Repositories\CoinMarketCapCryptoCurrenciesRepository;
-use App\Repositories\tradeRepositories\SellCryptoRepository;
+use App\Repositories\TradeRepositories\SellCryptoRepository;
 
 class SellCryptoService
 {

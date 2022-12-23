@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\tradeRepositories;
+namespace App\Repositories\TradeRepositories;
 
 use App\Database;
 use App\Services\CryptoCurrency\trade\TradeCryptoServiceRequest;

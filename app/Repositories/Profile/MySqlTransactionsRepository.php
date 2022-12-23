@@ -31,4 +31,18 @@ class MySqlTransactionsRepository
         }
         return new TransactionsCollection($transactionCollection);
     }
+
+    public function checkIfSymbolHasTransactions(string $symbol): bool
+    {
+        $queryBuilder = Database::getConnection()->createQueryBuilder();
+        $userTransactions = $queryBuilder
+            ->select('*')
+            ->from('transactions')
+            ->where('user_id = ?')
+            ->andWhere('symbol = ?')
+            ->setParameter(0, $_SESSION['auth_id'])
+            ->setParameter(1, $symbol)
+            ->fetchAllAssociative();
+        return !empty($userTransactions);
+    }
 }

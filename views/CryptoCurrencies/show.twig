@@ -1,28 +1,89 @@
 {% extends 'layout.twig' %}
 {% block content %}
-    <br><br><br>
-    <p>Available balance is {{ balance.balance|number_format(2) }}</p>
-    <br>
-    You're looking for {{ cryptoCurrency.symbol }} {{ cryptoCurrency.price|number_format(2) }}$.
+    <div class="show">
+        <div >
+            <div>
+                <h1>Available balance is {{ balance.balance|number_format(2) }}$</h1>
+            </div>
 
-    <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
-        <label for="buy">Buy amount: </label>
-        <input type="number" id="buy" name="buy">
-        <label for="symbol"></label>
-        <input type="hidden" name="symbol" value="{{ cryptoCurrency.symbol }}">
-        <label for="price"></label>
-        <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
-        <button>BUY</button>
-    </form>
+            <div>
+                <h3>
+                    Trade {{ cryptoCurrency.symbol }} for {{ cryptoCurrency.price|number_format(2) }}$.
+                </h3>
+                <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
+                    <label for="buy">Buy amount: </label>
+                    <input type="number" id="buy" name="buy">
+                    <label for="symbol"></label>
+                    <input type="hidden" name="symbol" value="{{ cryptoCurrency.symbol }}">
+                    <label for="price"></label>
+                    <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
+                    <button>BUY</button>
+                </form>
 
-    <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
-        <label for="sell">Sell amount: </label>
-        <input type="number" id="sell" name="sell">
-        <label for="symbol"></label>
-        <input type="hidden" name="symbol" value="{{ cryptoCurrency.symbol }}">
-        <label for="price"></label>
-        <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
-        <button>SELL</button>
-    </form>
+                <form action="/crypto/{{ cryptoCurrency.symbol }}" method="post">
+                    <label for="sell">Sell amount: </label>
+                    <input type="number" id="sell" name="sell">
+                    <label for="symbol"></label>
+                    <input type="hidden" name="symbol" value="{{ cryptoCurrency.symbol }}">
+                    <label for="price"></label>
+                    <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
+                    <button>SELL</button>
+                </form>
+            </div>
+
+            <div>
+                <br>
+                <h3>Don't have coins? Try shorting!</h3>
+
+                <form action="/shorting" method="post">
+                    <label for="short">Short amount: </label>
+                    <input type="number" id="short" name="short">
+                    <label for="symbol"></label>
+                    <input type="hidden" name="symbol" value="{{ cryptoCurrency.symbol }}">
+                    <label for="price"></label>
+                    <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
+                    <button>SHORT</button>
+                    <p>{{ errors.shorting }}</p>
+                </form>
+
+                <form action="/closing" method="post">
+                    <label for="close">Close amount: </label>
+                    <input type="number" id="close" name="close">
+                    <label for="symbol"></label>
+                    <input type="hidden" name="symbol" value="{{ cryptoCurrency.symbol }}">
+                    <label for="price"></label>
+                    <input type="hidden" name="price" value="{{ cryptoCurrency.price }}">
+                    <button>CLOSE</button>
+                </form>
+            </div>
+        </div>
+
+        {% if transactions %}
+
+        <div>
+            <table class="featured-table">
+                <tr>
+                    <th>Date</th>
+                    <th>Action</th>
+                    <th>Amount</th>
+                    <th>Price</th>
+                    <th>Profit</th>
+                </tr>
+
+                {% for transaction in transactions %}
+                    <tr>
+                        {% if cryptoCurrency.symbol == transaction.symbol %}
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.action }}</td>
+                        <td>{{ transaction.amount }}</td>
+                        <td>{{ transaction.price|number_format(2) }}$</td>
+                        <td>{{ transaction.profit|number_format(2) }}$</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+    </div>
 
 {% endblock %}

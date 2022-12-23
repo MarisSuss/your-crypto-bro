@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\DataTransferObjects\Redirect;
 use App\DataTransferObjects\View;
+use App\Services\FindUser\FindUserService;
+use App\Services\FindUser\TransferCryptoService;
 use App\Services\Profile\ListTransactionsService;
 use App\Services\Profile\ListUserCoinsService;
 
@@ -11,20 +13,26 @@ class UserProfileController
 {
     private ListTransactionsService $listTransactionsService;
     private ListUserCoinsService $listUserCoinsService;
+    private FindUserService $findUserService;
+    private TransferCryptoService $transferCryptoService;
 
     public function __construct(
         ListTransactionsService $listTransactionsService,
-        ListUserCoinsService $listUserCoinsService
+        ListUserCoinsService $listUserCoinsService,
+        FindUserService $findUserService,
+        TransferCryptoService $transferCryptoService
     )
     {
         $this->listTransactionsService = $listTransactionsService;
         $this->listUserCoinsService = $listUserCoinsService;
+        $this->findUserService = $findUserService;
+        $this->transferCryptoService = $transferCryptoService;
     }
 
     public function index(): View
     {
-        $transactions = $this->listTransactionsService->execute();
-        return View::render('profileViews/userProfile.twig', ['transactions' => $transactions->all()]);
+        // $transactions = $this->listTransactionsService->execute();
+        return View::render('profileViews/userProfile.twig', []);
     }
 
     public function userWallet(): View
@@ -38,8 +46,15 @@ class UserProfileController
         return new Redirect('/profile/' . $_POST['user']);
     }
 
-    public function findUser(): View
+    public function findUser($vars): View
     {
-        return View::render('profileViews/findUser.twig', []);
+        $findUser = $this->findUserService->execute($vars);
+        return View::render('profileViews/findUser.twig', ['findUser' => $findUser]);
+    }
+
+    public function transferCrypto($vars): Redirect
+    {
+        $this->transferCryptoService->execute($_POST);
+        return new Redirect('/profile/' . $vars['user']);
     }
 }

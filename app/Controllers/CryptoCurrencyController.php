@@ -6,21 +6,25 @@ use App\DataTransferObjects\Redirect;
 use App\DataTransferObjects\View;
 use App\Services\CryptoCurrency\ListCryptoCurrenciesService;
 use App\Services\CryptoCurrency\ShowCryptoCurrencyService;
-use App\Services\CryptoCurrency\trade\BuyCryptoService;
-use App\Services\CryptoCurrency\trade\SellCryptoService;
+use App\Services\CryptoCurrency\Trade\BuyCryptoService;
+use App\Services\CryptoCurrency\Trade\SellCryptoService;
+use App\Services\Profile\ListTransactionsService;
 
 class CryptoCurrencyController
 {
     private ListCryptoCurrenciesService $listCryptoCurrenciesService;
     private ShowCryptoCurrencyService $showCryptoCurrencyService;
+    private ListTransactionsService $listTransactionsService;
 
     public function __construct(
         ListCryptoCurrenciesService $listCryptoCurrenciesService,
-        ShowCryptoCurrencyService   $showCryptoCurrencyService
+        ShowCryptoCurrencyService   $showCryptoCurrencyService,
+        ListTransactionsService $listTransactionsService
     )
     {
         $this->listCryptoCurrenciesService = $listCryptoCurrenciesService;
         $this->showCryptoCurrencyService = $showCryptoCurrencyService;
+        $this->listTransactionsService = $listTransactionsService;
     }
 
     public function index(): View
@@ -36,8 +40,18 @@ class CryptoCurrencyController
 
     public function show(array $vars): View
     {
+        $validator = $this->listTransactionsService->checkIfSymbolHasTransactions($vars['symbol']);
+
+        if ($validator) {
+            return View::render('CryptoCurrencies/show.twig', [
+                'cryptoCurrency' => $this->showCryptoCurrencyService->execute($vars['symbol']),
+                'transactions' => $this->listTransactionsService->execute()->all()
+            ]);
+        }
+
         return View::render('CryptoCurrencies/show.twig', [
-            'cryptoCurrency' => $this->showCryptoCurrencyService->execute($vars['symbol'])
+            'cryptoCurrency' => $this->showCryptoCurrencyService->execute($vars['symbol']),
+            'transactions' => $validator
         ]);
     }
 
