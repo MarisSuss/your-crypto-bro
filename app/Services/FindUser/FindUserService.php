@@ -17,6 +17,11 @@ class FindUserService
             ->setParameter(0, $vars['user'])
             ->fetchAssociative();
 
+        if (!$userInfo) {
+            $_SESSION['errors']['findUser'] = 'User not found';
+            return null;
+        }
+
         return new OtherUser($userInfo['name'], (int) $userInfo['id']);
     }
 }

@@ -16,9 +16,11 @@ class TransferCryptoService
         );
         $repository = new MySqlTransferCryptoRepository($request);
         if (!$repository->confirmPassword()) {
+            $_SESSION['errors']['transfer'] = 'Wrong password';
             return;
         }
         if (!$repository->checkIfEnoughCoins()) {
+            $_SESSION['errors']['transfer'] = 'Not enough coins';
             return;
         }
         $repository->transferCryptoAndSaveTransaction();

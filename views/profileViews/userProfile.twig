@@ -16,6 +16,9 @@
                         <label for="user">User: </label>
                         <input type="text" id="user" name="user" placeholder="CRYPTO BRO" required>
                         <input type="submit" value="Search">
+                        {% if errors.findUser %}
+                            <p style="color: red; font-weight: bold">{{ errors.findUser }}</p>
+                        {% endif %}
                     </form>
                 </div>
             </div>

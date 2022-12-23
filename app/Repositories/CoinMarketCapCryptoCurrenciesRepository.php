@@ -32,11 +32,15 @@ class CoinMarketCapCryptoCurrenciesRepository implements CryptoCurrenciesReposit
         return $cryptoCurrencies;
     }
 
-    public function fetchBySymbol(string $symbol): CryptoCurrency
+    public function fetchBySymbol(string $symbol): ?CryptoCurrency
     {
         $response = $this->fetch($symbol);
-
-        return $this->buildModel($response->data->{$symbol});
+        try {
+            return $this->buildModel($response->data->{$symbol});
+        } catch (\Exception $e) {
+            $_SESSION['errors']['search'] = 'Failed to find!';
+        }
+        return null;
     }
 
     private function fetch(string $symbols)

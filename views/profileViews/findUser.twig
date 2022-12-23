@@ -18,6 +18,9 @@
                     <label for="id"></label>
                     <input type="hidden" name="id" value="{{ findUser.id }}">
                     <input type="submit" value="Give coins">
+                    {% if errors.transfer %}
+                        <p style="color: red; font-weight: bold">{{ errors.transfer }}</p>
+                    {% endif %}
                 </div>
             </form>
         </div>

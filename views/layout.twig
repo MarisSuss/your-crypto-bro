@@ -35,6 +35,9 @@
             <input class="search-bar" type="text" id="search" name="search" placeholder="COIN" required>
             <input class="search-button" type="submit" value="Search">
         </form>
+        {% if errors.search %}
+            <p style="color: red; font-weight: bold">{{ errors.search }}</p>
+        {% endif %}
     </div>
 
 
