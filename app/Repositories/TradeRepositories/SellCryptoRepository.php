@@ -80,13 +80,13 @@ class SellCryptoRepository
             }
 
         }
-        $this->addTransaction($this->totalSellPrice, $totalOriginalPrice);
+        $profit = $this->totalSellPrice - $totalOriginalPrice;
+
+        $this->addTransaction($profit);
     }
 
-    private function addTransaction(float $totalSellPrice, float $totalOriginalPrice): void
+    private function addTransaction(float $profit): void
     {
-        $profitLoss = $totalOriginalPrice - $totalSellPrice;
-
         $this->builder
             ->insert('transactions')
             ->values([
@@ -103,7 +103,7 @@ class SellCryptoRepository
             ->setParameter(2, 'sell')
             ->setParameter(3, $this->totalCoins)
             ->setParameter(4, $this->pricePerCoin)
-            ->setParameter(5, $profitLoss)
+            ->setParameter(5, $profit)
             ->setParameter(6, $_SESSION['auth_id'])
             ->executeQuery();
     }

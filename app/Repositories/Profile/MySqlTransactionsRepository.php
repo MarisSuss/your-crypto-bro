@@ -19,6 +19,8 @@ class MySqlTransactionsRepository
             ->setParameter(0, $_SESSION['auth_id'])
             ->fetchAllAssociative();
 
+
+
         foreach ($userTransactions as $transaction) {
             $transactionCollection[] = new Transaction(
                 $transaction['action'],
@@ -26,10 +28,13 @@ class MySqlTransactionsRepository
                 $transaction['date'],
                 $transaction['symbol'],
                 $transaction['price'],
-                $transaction['profit'] ?? 0
+                $transaction['profit_loss'] ?? 0
             );
         }
-        return new TransactionsCollection($transactionCollection);
+
+        $transactionsCollectionInReverseOrder = array_reverse($transactionCollection);
+
+        return new TransactionsCollection($transactionsCollectionInReverseOrder);
     }
 
     public function checkIfSymbolHasTransactions(string $symbol): bool

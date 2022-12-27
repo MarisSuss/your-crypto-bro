@@ -13,11 +13,11 @@ class Database
     {
         if (self::$connection == null) {
             $connectionParams = [
-                'dbname' => 'your-crypto-bro',
-                'user' => 'root',
+                'dbname' => $_ENV['DB_NAME'],
+                'user' => $_ENV['DB_USER'],
                 'password' => $_ENV['DATABASE_PASSWORD'],
-                'host' => 'localhost',
-                'driver' => 'pdo_mysql',
+                'host' => $_ENV['DB_HOST'],
+                'driver' => $_ENV['DB_DRIVER'],
             ];
             self::$connection = DriverManager::getConnection($connectionParams);
         }

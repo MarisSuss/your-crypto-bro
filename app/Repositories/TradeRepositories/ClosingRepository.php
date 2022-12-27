@@ -73,12 +73,12 @@ class ClosingRepository
 
             if (-$userShorts['amount'] <= $neededAmount) {
                 $neededAmount += $userShorts['amount'];
-                $totalOriginalPrice -= $userShorts['amount'] * $userShorts['price'];
+                $totalOriginalPrice += $userShorts['amount'] * $userShorts['price'];
 
                 Database::getConnection()->delete('coins', ['id' => $userShorts['id']]);
 
             } else {
-                $totalOriginalPrice -= $neededAmount * $userShorts['price'];
+                $totalOriginalPrice += $neededAmount * $userShorts['price'];
                 $queryBuilder
                     ->update('coins')
                     ->set('amount', '?')
@@ -90,7 +90,7 @@ class ClosingRepository
             }
         }
 
-        $profit = $this->amount * $this->price - $totalOriginalPrice;
+        $profit = $totalOriginalPrice - $this->amount * $this->price;
         $this->addTransaction($profit);
     }
 
