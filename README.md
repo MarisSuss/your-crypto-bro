@@ -9,6 +9,7 @@ This project is cryptocurrency trading website for:
 * Build your own portfolio.
 * See your transaction history for specific cryptocurrencies.
 * Send and receive cryptocurrencies to other users.
+* Everything mentioned is validated.
 
 
 ## Technologies used
@@ -24,3 +25,8 @@ This project is cryptocurrency trading website for:
 3. Create a database and import the `your-crypto-bro.sql` file.
 4. Rename the `.env.example` file to `.env` and fill in the required fields.
 5. Run the following command: `php -S localhost:8000 -t public`.
+
+## Showcase
+
+#### Register and Login
+(showcase/1-login.gif)
