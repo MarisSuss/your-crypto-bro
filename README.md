@@ -28,5 +28,9 @@ This project is cryptocurrency trading website for:
 
 ## Showcase
 
-#### Register and Login
-![gif](showcase/1-login.gif)
+<div align="center">
+    <h4>
+        Register and Login
+    </h4>
+    <img src="public/showcase/1-login.gif" alt="Register and Login">
+</div>
