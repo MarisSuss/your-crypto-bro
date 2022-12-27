@@ -29,4 +29,4 @@ This project is cryptocurrency trading website for:
 ## Showcase
 
 #### Register and Login
-(showcase/1-login.gif)
+![gif](showcase/1-login.gif)
